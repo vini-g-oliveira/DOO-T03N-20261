@@ -45,16 +45,17 @@ public static ArrayList<Plantas> plantas= new ArrayList<>();
 
         System.out.print("Digite o preço unitário da planta: ");
         double preco = scanner.nextDouble();
-        boolean desconto = false;
+        double desconto = 0;
+        double total = 0;
         if (quantidade >= 10) {
             System.out.println("parabens voce ganhou um desconto de 5%");
-            preco = preco-(preco * 5)/100;
-
-          desconto = true;
+           desconto = preco;
+            desconto = desconto-(desconto * 5)/100;
+             total = quantidade * desconto;
         }
-
-        double total = quantidade * preco;
-
+else {
+             total = quantidade * preco;
+        }
         Plantas plantas1 = new Plantas(quantidade, preco, total, desconto);
         plantas.add(plantas1);
 

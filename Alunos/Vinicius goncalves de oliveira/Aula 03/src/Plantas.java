@@ -4,11 +4,11 @@ public class Plantas {
 int quantidade;
 double preco;
 double total;
-boolean desconto;
+double desconto;
 
     public Plantas() {}
 
-    public Plantas(int quantidade,  double preco, double total, boolean desconto) {
+    public Plantas(int quantidade,  double preco, double total, double desconto) {
         this.quantidade = quantidade;
         this.preco = preco;
         this.total = total;
@@ -16,7 +16,7 @@ boolean desconto;
 
     }
 
-    public void setDesconto(boolean desconto) {
+    public void setDesconto(double desconto) {
         this.desconto = desconto;
     }
 
