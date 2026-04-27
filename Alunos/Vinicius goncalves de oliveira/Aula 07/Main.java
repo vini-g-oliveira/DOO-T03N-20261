@@ -73,7 +73,7 @@ public class Main {
         String razaoSocial = scanner.nextLine();
         System.out.print("CNPJ: ");
         String cnpj = scanner.nextLine();
-        Endereco enderecoLoja = lerEndereco(scanner, false);
+        Endereco enderecoLoja = lerEndereco(scanner);
 
         Loja loja = new Loja(nomeFantasia, razaoSocial, cnpj, enderecoLoja);
 
@@ -88,7 +88,7 @@ public class Main {
             System.out.print("Idade: ");
             int idadeCliente = scanner.nextInt();
             scanner.nextLine();
-            Endereco enderecoCliente = lerEndereco(scanner, true);
+            Endereco enderecoCliente = lerEndereco(scanner);
 
             Cliente cliente = new Cliente(nomeCliente, idadeCliente, enderecoCliente);
             loja.adicionarCliente(cliente);
@@ -123,7 +123,7 @@ public class Main {
         System.out.print("Idade: ");
         int idadeVendedor = scanner.nextInt();
         scanner.nextLine();
-        Endereco enderecoVendedor = lerEndereco(scanner, true);
+        Endereco enderecoVendedor = lerEndereco(scanner);
         System.out.print("Salario base: ");
         double salarioBase = scanner.nextDouble();
         scanner.nextLine();
@@ -138,7 +138,7 @@ public class Main {
         System.out.print("Idade: ");
         int idadeGerente = scanner.nextInt();
         scanner.nextLine();
-        Endereco enderecoGerente = lerEndereco(scanner, true);
+        Endereco enderecoGerente = lerEndereco(scanner);
         System.out.print("Salario base: ");
         double salarioBase = scanner.nextDouble();
         scanner.nextLine();
@@ -158,7 +158,7 @@ public class Main {
         return salariosRecebidos;
     }
 
-    private static Endereco lerEndereco(Scanner scanner, boolean pedirComplemento) {
+    private static Endereco lerEndereco(Scanner scanner) {
         System.out.print("Estado: ");
         String estado = scanner.nextLine();
         System.out.print("Cidade: ");
@@ -169,12 +169,8 @@ public class Main {
         String rua = scanner.nextLine();
         System.out.print("Numero: ");
         String numero = scanner.nextLine();
-        String complemento = "";
-
-        if (pedirComplemento) {
-            System.out.print("Complemento: ");
-            complemento = scanner.nextLine();
-        }
+        System.out.print("Complemento: ");
+        String complemento = scanner.nextLine();
 
         return new Endereco(estado, cidade, bairro, rua, numero, complemento);
     }
@@ -292,8 +288,12 @@ public class Main {
     }
 
     private static void criarPedidoFake() {
-        if (lojaCadastrada == null || vendedorCadastrado == null || lojaCadastrada.getClientes().isEmpty()) {
+        if (lojaCadastrada == null || vendedorCadastrado == null) {
             System.out.println("Cadastre a loja, clientes e vendedor antes de criar um pedido.");
+            return;
+        }
+        if (lojaCadastrada.getClientes() == null || lojaCadastrada.getClientes().isEmpty()) {
+            System.out.println("Cadastre pelo menos um cliente.");
             return;
         }
 
